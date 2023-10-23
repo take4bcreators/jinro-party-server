@@ -1,6 +1,12 @@
 FROM postgres:latest
 
-COPY ./init/init.sql /docker-entrypoint-initdb.d/init.sql
+# DB作成用の指定
+ENV POSTGRES_USER jinro
+ENV POSTGRES_PASSWORD jinro
+ENV POSTGRES_DB jinrodb
 
-ENV POSTGRES_USER postgres
-ENV POSTGRES_PASSWORD postgres
+# 初期化用資材の反映
+COPY ./init/sql/ /docker-entrypoint-initdb.d/
+COPY ./init/csv/ /tmp/init_data/
+
+EXPOSE 5432
