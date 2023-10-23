@@ -6,3 +6,7 @@
 work/*
 !.gitkeep
 
+*.jar
+
+
+
