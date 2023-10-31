@@ -1,5 +1,0 @@
-game_data_id,device_id,session_id,player_name,player_icon,player_role,player_team,player_state
-gd00001,0001-0001-0001,001,tanaka,01,RL001,TM01,Alive
-gd00001,0001-0001-0002,002,sato,01,RL002,TM01,Alive
-gd00001,0001-0001-0003,003,suzuki,01,RL004,TM01,Alive
-gd00002,0001-0001-0004,004,tanaka,01,RL001,TM02,Alive
