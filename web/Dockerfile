@@ -1,5 +1,17 @@
-# ベースイメージの指定
-FROM httpd:latest
+FROM node:18-alpine AS base
 
-# ファイルをコンテナにコピー
-COPY build/out/* /usr/local/apache2/htdocs/
+# builder ステージ開始
+FROM base AS builder
+WORKDIR /app
+COPY ./srcfile/package.json ./srcfile/package-lock.json ./
+RUN npm install
+COPY ./srcfile .
+RUN npm run build
+
+# runner ステージ開始
+FROM base AS runner
+WORKDIR /app
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/.next/standalone ./
+CMD ["node", "server.js"]
