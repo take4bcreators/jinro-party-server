@@ -7,8 +7,3 @@ COPY dev.game_data
 FROM '/tmp/init_data/01_game_data.csv'
 WITH (FORMAT csv, HEADER true)
 ;
-
-COPY work.game_data
-FROM '/tmp/init_data/01_game_data.csv'
-WITH (FORMAT csv, HEADER true)
-;
