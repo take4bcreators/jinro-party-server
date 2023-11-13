@@ -5,7 +5,8 @@ FROM openjdk:17
 WORKDIR /app
 
 # アプリケーションのJARファイルをコンテナにコピー
-COPY build/libs/*.jar app.jar
+# COPY build/libs/*.jar app.jar
+COPY ./app/build/libs/*.jar app.jar
 
 # ポートの公開
 EXPOSE 8080

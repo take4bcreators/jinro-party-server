@@ -3,9 +3,9 @@ FROM node:18-alpine AS base
 # builder ステージ開始
 FROM base AS builder
 WORKDIR /app
-COPY ./srcfile/package.json ./srcfile/package-lock.json ./
+COPY ./web/srcfile/package.json ./web/srcfile/package-lock.json ./
 RUN npm install
-COPY ./srcfile .
+COPY ./web/srcfile .
 RUN npm run build
 
 # runner ステージ開始

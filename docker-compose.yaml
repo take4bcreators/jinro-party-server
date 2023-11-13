@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  web: 
+    container_name: jinrowebcont
+    build:
+      dockerfile: web/Dockerfile
+      context: .
+    ports:
+      - 3000:3000
+    links:
+    #  - "web:app"
+     - "app:app"
+    tty: true
+  app: 
+    container_name: jinroappcont
+    build:
+      dockerfile: app/Dockerfile
+      context: .
+    ports:
+      - 8080:8080
+    links:
+      # - "app:db"
+      - "db:db"
+    tty: true
+  db: 
+    container_name: jinrodbcont
+    build:
+      dockerfile: db/Dockerfile
+      context: .
+    ports:
+      - 5432:5432
+    tty: true
