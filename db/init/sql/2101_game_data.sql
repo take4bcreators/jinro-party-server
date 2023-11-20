@@ -6,6 +6,7 @@ CREATE TABLE prd.game_data (
     is_end BOOLEAN,
     current_turn INTEGER,
     turn_vote_count INTEGER,
+    winning_team VARCHAR,
     PRIMARY KEY(game_data_id)
 );
 
@@ -16,5 +17,6 @@ CREATE TABLE dev.game_data (
     is_end BOOLEAN,
     current_turn INTEGER,
     turn_vote_count INTEGER,
+    winning_team VARCHAR,
     PRIMARY KEY(game_data_id)
 );
