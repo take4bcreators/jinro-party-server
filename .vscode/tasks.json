@@ -1,0 +1,95 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "[001] アプリケーションの起動",
+      "detail": "docker compose up -d でアプリケーションを起動します",
+      "icon": {
+        "color": "terminal.ansiRed",
+        "id": "run-all"
+      },
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "up", "-d"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "[002] アプリケーションの停止・イメージ削除",
+      "detail": "docker compose down --rmi all でアプリケーションの停止と削除をします",
+      "icon": {
+        "color": "terminal.ansiBlue",
+        "id": "trash"
+      },
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "down", "--rmi", "all"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "[003] アプリケーションの停止（イメージは残す）",
+      "detail": "docker compose down でアプリケーションの停止をします",
+      "icon": {
+        "color": "terminal.ansiCyan",
+        "id": "primitive-square"
+      },
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "down"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "[004] アプリケーション再起動",
+      "detail": "docker compose restart でアプリケーションの再起動をします",
+      "icon": {
+        "color": "terminal.ansiYellow",
+        "id": "refresh"
+      },
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "restart"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "[005] DBのみ起動",
+      "detail": "docker compose up -d でDBのみ起動します",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "database"
+      },
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "up", "-d", "db"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": []
+    },
+  ]
+}
