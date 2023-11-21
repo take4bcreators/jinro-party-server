@@ -8,9 +8,6 @@ services:
       context: .
     ports:
       - 3000:3000
-    networks:
-      frontend:
-        ipv4_address: 192.168.10.5
     tty: true
   app: 
     container_name: jinroappcont
@@ -19,12 +16,11 @@ services:
       context: .
     ports:
       - 8080:8080
-    networks:
-      frontend:
-        ipv4_address: 192.168.10.8
-      backend:
-        ipv4_address: 192.168.20.8
     tty: true
+    depends_on:
+      - db
+    environment:
+      DATASOURCE: jdbc:postgresql://db:5432/jinrodb
   db: 
     container_name: jinrodbcont
     build:
@@ -32,21 +28,4 @@ services:
       context: .
     ports:
       - 5432:5432
-    networks:
-      backend:
-        ipv4_address: 192.168.20.10
     tty: true
-
-networks:
-  frontend:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.10.0/24
-  backend:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.20.0/24
