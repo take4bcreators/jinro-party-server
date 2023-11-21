@@ -37,6 +37,38 @@ export namespace APIRouting {
     PostFetchPlayerData: '/api/post-fetch-player-data',
     /** GET: 接続用疎通確認実行 */
     GetExecPing: '/api/get-exec-ping',
+    /** GET: 追放者投票対象プレイヤー取得 */
+    GetFetchMainVoteReceivers: '/api/get-fetch-main-vote-receivers',
+    /** POST: 追放者投票登録 */
+    PostSaveMainVote: '/api/post-save-main-vote',
+    /** GET: 投票結果取得 */
+    GetFetchVoteResult: '/api/get-fetch-vote-result',
+    /** GET: 追放者プレイヤー情報取得 */
+    GetFetchDropoutPlayer: '/api/get-fetch-dropout-player',
+    /** POST: 占い師テーブルデータ存在確認 */
+    PostExistsNightActionData: '/api/post-exists-night-action-data',
+    /** POST: 占い師テーブルデータ取得 */
+    PostFetchNightActionData: '/api/post-fetch-night-action-data',
+    /** POST: 他生存プレイヤーデータ取得 */
+    PostFetchOtherAlivePlayers: '/api/post-fetch-other-alive-players',
+    /** POST: 占い師アクション実行 */
+    PostExecSeerAction: '/api/post-exec-seer-action',
+    /** POST: アンケートアクション実行 */
+    PostExecEnqueteAction: '/api/post-exec-enquete-action',
+    /** POST: 狩人アクション実行 */
+    PostExecHunterAction: '/api/post-exec-hunter-action',
+    /** POST: 人狼アクション実行 */
+    PostExecWerewolfAction: '/api/post-exec-werewolf-action',
+    /** POST: 霊能者アクション実行 */
+    PostExecMediumAction: '/api/post-exec-medium-action',
+    /** GET: 人狼以外生存プレイヤー情報取得 */
+    GetFetchAliversForWerewolf: '/api/get-fetch-alivers-for-werewolf',
+    /** POST: 人狼アクション実行プレイヤー確認 */
+    PostCheckWerewolfExecuter: '/api/post-check-werewolf-executer',
+    /** GET: 勝利チーム取得 */
+    GetFetchWinningTeam: '/api/get-fetch-winning-team',
+    /** GET: 終了ゲームリセット */
+    GetEndGameReset: '/api/get-end-game-reset',
   } as const;
   export type Point = (typeof Point)[keyof typeof Point];
 }

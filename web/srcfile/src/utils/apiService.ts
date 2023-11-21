@@ -10,10 +10,15 @@ export namespace APIService {
    * @returns 作成したURL
    */
   function makeAPIEndpointURL(routingPoint: APIRouting.Point): string {
-    const apiHost = process.env.NEXT_PUBLIC_HOST;
-    if (apiHost == undefined) {
-      return '';
+    let host = process.env.NEXT_PUBLIC_HOSTNAME;
+    if (host == undefined || host === '') {
+      host = window.location.hostname;
     }
+    let port = process.env.NEXT_PUBLIC_PORT;
+    if (port == undefined || port === '') {
+      port = '8080';
+    }
+    const apiHost = `http://${host}:${port}`;
     return `${apiHost}${routingPoint}`;
   }
 
@@ -360,6 +365,273 @@ export namespace APIService {
    */
   export async function getExecPing() {
     const apiEndpointURL = makeAPIEndpointURL(APIRouting.Point.GetExecPing);
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const res = await fetch(apiEndpointURL);
+    const resData: APIData.APIReplyProcessResult = await res.json();
+    return resData.result;
+  }
+
+  /**
+   * 追放者投票対象プレイヤー取得 API GET実行
+   * @returns 処理結果（プロミス）
+   */
+  export async function getFetchMainVoteReceivers() {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.GetFetchMainVoteReceivers
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const res = await fetch(apiEndpointURL);
+    const resData: APIData.APIReplyAllPlayerData = await res.json();
+    return resData;
+  }
+
+  /**
+   * 追放者投票登録 API POST実行
+   * @param requestDataObject リクエスト送信値オブジェクト
+   * @returns 処理結果（プロミス）
+   */
+  export async function postSaveMainVote(
+    requestDataObject: APIData.APISendVotePlayerData
+  ): Promise<boolean | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostSaveMainVote
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyProcessResult = await res.json();
+    return resData.result;
+  }
+
+  /**
+   * 投票結果取得 API GET実行
+   * @returns 処理結果（プロミス）
+   */
+  export async function getFetchVoteResult() {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.GetFetchVoteResult
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const res = await fetch(apiEndpointURL);
+    const resData: APIData.APIReplyAllVotePlayerData = await res.json();
+    return resData;
+  }
+
+  /**
+   * 追放者プレイヤー情報取得 API GET実行
+   * @returns 処理結果（プロミス）
+   */
+  export async function getFetchDropoutPlayer() {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.GetFetchDropoutPlayer
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const res = await fetch(apiEndpointURL);
+    const resData: APIData.APIPlayerBasicData = await res.json();
+    return resData;
+  }
+
+  export async function postExistsNightActionData(
+    requestDataObject: APIData.APISendDeviceId
+  ): Promise<boolean | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostExistsNightActionData
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyExistsDeviceId = await res.json();
+    return resData.exists;
+  }
+
+  export async function postFetchNightActionData(
+    requestDataObject: APIData.APISendDeviceId
+  ): Promise<APIData.APIReplyPlayerData | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostFetchNightActionData
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyPlayerData = await res.json();
+    return resData;
+  }
+
+  export async function postFetchOtherAlivePlayers(
+    requestDataObject: APIData.APISendDeviceId
+  ): Promise<APIData.APIMultiPlayerBasicData | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostFetchOtherAlivePlayers
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIMultiPlayerBasicData = await res.json();
+    return resData;
+  }
+
+  export async function postExecSeerAction(
+    requestDataObject: APIData.APISendNightActionData
+  ): Promise<boolean | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostExecSeerAction
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyProcessResult = await res.json();
+    return resData.result;
+  }
+
+  export async function postExecEnqueteAction(
+    requestDataObject: APIData.APISendNightActionData
+  ): Promise<boolean | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostExecEnqueteAction
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyProcessResult = await res.json();
+    return resData.result;
+  }
+
+  export async function postExecHunterAction(
+    requestDataObject: APIData.APISendNightActionData
+  ): Promise<boolean | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostExecHunterAction
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyProcessResult = await res.json();
+    return resData.result;
+  }
+
+  export async function postExecWerewolfAction(
+    requestDataObject: APIData.APISendNightActionData
+  ): Promise<boolean | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostExecWerewolfAction
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyProcessResult = await res.json();
+    return resData.result;
+  }
+
+  export async function postExecMediumAction(
+    requestDataObject: APIData.APISendDeviceId
+  ): Promise<boolean | undefined> {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostExecMediumAction
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyProcessResult = await res.json();
+    return resData.result;
+  }
+
+  export async function getFetchAliversForWerewolf() {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.GetFetchAliversForWerewolf
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const res = await fetch(apiEndpointURL);
+    const resData: APIData.APIMultiPlayerBasicData = await res.json();
+    return resData;
+  }
+
+  export async function postCheckWerewolfExecuter(
+    requestDataObject: APIData.APISendDeviceId
+  ) {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.PostCheckWerewolfExecuter
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const form = new TypedFormData(requestDataObject);
+    const res = await fetch(apiEndpointURL, {
+      method: 'POST',
+      body: form,
+    });
+    const resData: APIData.APIReplyProcessResult = await res.json();
+    return resData.result;
+  }
+
+  export async function getFetchWinningTeam() {
+    const apiEndpointURL = makeAPIEndpointURL(
+      APIRouting.Point.GetFetchWinningTeam
+    );
+    if (apiEndpointURL === '') {
+      return;
+    }
+    const res = await fetch(apiEndpointURL);
+    const resData: APIData.APIWinningTeam = await res.json();
+    return resData.winningTeam;
+  }
+
+  export async function getEndGameReset() {
+    const apiEndpointURL = makeAPIEndpointURL(APIRouting.Point.GetEndGameReset);
     if (apiEndpointURL === '') {
       return;
     }

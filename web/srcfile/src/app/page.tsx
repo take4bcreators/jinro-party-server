@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -9,6 +9,7 @@ export default function Home(): JSX.Element {
   const searchParams = useSearchParams();
   const site = searchParams.get('site');
   const router = useRouter();
+  const [myLocation, setMyLocation] = useState<Location | null>(null);
 
   useEffect(() => {
     if (site === null) {
@@ -28,6 +29,14 @@ export default function Home(): JSX.Element {
         break;
     }
   }, [site, router]);
+
+  useEffect(() => {
+    setMyLocation(window.location);
+  }, []);
+
+  if (myLocation == null) {
+    return <></>;
+  }
 
   return (
     <main>
@@ -58,7 +67,18 @@ export default function Home(): JSX.Element {
           <li>
             <Link href="/debug/timer4">Timer Debug4</Link>
           </li>
+          <li>
+            <Link href="/debug/qrcode">QRCode Debug</Link>
+          </li>
+          <li></li>
+          <li>
+            <Link href="/pl/playing/state">PL Playing Debug</Link>
+          </li>
         </ul>
+      </section>
+      <section>
+        <h1>DEBUG...</h1>
+        <p>{myLocation.hostname}</p>
       </section>
     </main>
   );

@@ -106,4 +106,90 @@ export namespace APIData {
     /** 全プレイヤーデータ */
     allPlayerData: APIReplyPlayerData[];
   };
+
+  /**
+   * 投票用プレイヤーデータ レスポンス APIデータ
+   */
+  export type APIReplyVotePlayerData = {
+    /** 投票プレイヤーデバイスID */
+    voterDeviceId: string;
+    /** 投票プレイヤー名 */
+    voterPlayerName: string;
+    /** 投票プレイヤーID */
+    voterPlayerIcon: string;
+    /** 被投票プレイヤーデバイスID */
+    receiverDeviceId: string;
+    /** 被投票プレイヤー名 */
+    receiverPlayerName: string;
+    /** 被投票プレイヤーアイコン */
+    receiverPlayerIcon: string;
+  };
+
+  /**
+   * 全投票用プレイヤーデータ レスポンス APIデータ
+   */
+  export type APIReplyAllVotePlayerData = {
+    /** 全プレイヤーデータ */
+    allVotePlayerData: APIReplyVotePlayerData[];
+  };
+
+  /**
+   * 投票用プレイヤーデータ レスポンス APIデータ
+   */
+  export type APISendVotePlayerData = {
+    /** 投票プレイヤーデバイスID */
+    voterDeviceId: string;
+    /** 投票プレイヤー名 */
+    voterPlayerName: string;
+    /** 投票プレイヤーID */
+    voterPlayerIcon: string;
+    /** 被投票プレイヤーデバイスID */
+    receiverDeviceId: string;
+    /** 被投票プレイヤー名 */
+    receiverPlayerName: string;
+    /** 被投票プレイヤーアイコン */
+    receiverPlayerIcon: string;
+  };
+
+  /**
+   * 夜アクション用データ レスポンス APIデータ
+   */
+  export type APISendNightActionData = {
+    /** デバイスID */
+    deviceId: string;
+    /** 対象プレイヤーのデバイスID */
+    receiverDeviceId: string;
+  };
+
+  //
+  // リクエスト・レスポンス共通
+  //
+
+  /**
+   * プレイヤー基本データ APIデータ
+   */
+  export type APIPlayerBasicData = {
+    /** デバイスID */
+    deviceId: string;
+    /** プレイヤー名 */
+    playerName: string;
+    /** プレイヤーアイコン */
+    playerIcon: string;
+  };
+
+  /**
+   * 複数プレイヤー基本データ APIデータ
+   */
+  export type APIMultiPlayerBasicData = {
+    /** すべてのデータ */
+    allData: APIPlayerBasicData[];
+  };
+
+  /**
+   * 勝利チーム APIデータ
+   */
+  export type APIWinningTeam = {
+    /** 勝利チーム */
+    winningTeam: PlayerTeam;
+  };
 }

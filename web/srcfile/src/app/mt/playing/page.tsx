@@ -14,7 +14,20 @@ import PageRoleAssignment from './state/RoleAssignment';
 import PageDayPhaseStart from './state/DayPhaseStart';
 import PageDayPhase from './state/DayPhase';
 import PageDayPhaseEnd from './state/DayPhaseEnd';
+import PageVoting from './state/Voting';
+import PageVotingEnd from './state/VotingEnd';
+import PageVoteResult from './state/VoteResult';
+import PageExileAnnouncement from './state/ExileAnnouncement';
+import PageFinalExileAnnouncement from './state/FinalExileAnnouncement';
+import PageNightPhaseStart from './state/NightPhaseStart';
 import PageNightPhase from './state/NightPhase';
+import PageNightPhaseEnd from './state/NightPhaseEnd';
+import PageMorningPhaseStart from './state/MorningPhaseStart';
+import PageNightActionResult from './state/NightActionResult';
+import PageGameEnd from './state/GameEnd';
+import PageFinalResult from './state/FinalResult';
+import PageRoleReveal from './state/RoleReveal';
+
 import { WsRequestAction } from '@/config/wsRequestAction';
 
 export default function Home(): JSX.Element {
@@ -50,13 +63,25 @@ export default function Home(): JSX.Element {
   }
 
   let nextState: GameState = GameState.Empty;
-  let actionParameter01: string = '';
+  let param01: string = '';
+  let param02: string = '';
+  let param03: string = '';
   if (wsRcvData.requestAction === WsRequestAction.GameScreenChange) {
     nextState = wsRcvData.actionParameter01 as GameState;
     lastGameState.current = nextState;
+  } else if (wsRcvData.requestAction === WsRequestAction.CountdownTimerStart) {
+    nextState = lastGameState.current;
+    param01 = 'start';
+    param02 = wsRcvData.actionParameter01;
+  } else if (wsRcvData.requestAction === WsRequestAction.CountdownTimerPause) {
+    nextState = lastGameState.current;
+    param01 = 'pause';
+  } else if (wsRcvData.requestAction === WsRequestAction.CountdownTimerResume) {
+    nextState = lastGameState.current;
+    param01 = 'start';
   } else {
     nextState = lastGameState.current;
-    actionParameter01 = wsRcvData.actionParameter01;
+    param01 = wsRcvData.actionParameter01;
   }
 
   // const nextState = wsRcvData.actionParameter01 as GameState;
@@ -76,35 +101,37 @@ export default function Home(): JSX.Element {
     case GameState.DayPhaseStart:
       return <PageDayPhaseStart />;
     case GameState.DayPhase:
-      return <PageDayPhase />;
+      return <PageDayPhase timerState={param01} initialCount={param02} />;
     case GameState.DayPhaseEnd:
       return <PageDayPhaseEnd />;
     case GameState.Voting:
-      break; // @todo
+      return <PageVoting timerState={param01} initialCount={param02} />;
     case GameState.VotingEnd:
-      break; // @todo
+      return <PageVotingEnd />;
     case GameState.VoteResult:
-      break; // @todo
+      return <PageVoteResult />;
     case GameState.ExileAnnouncement:
-      break; // @todo
+      return (
+        <PageExileAnnouncement timerState={param01} initialCount={param02} />
+      );
     case GameState.FinalExileAnnouncement:
-      break; // @todo
+      return <PageFinalExileAnnouncement />;
     case GameState.NightPhaseStart:
-      break; // @todo
+      return <PageNightPhaseStart />;
     case GameState.NightPhase:
-      return <PageNightPhase />;
+      return <PageNightPhase timerState={param01} initialCount={param02} />;
     case GameState.NightPhaseEnd:
-      break; // @todo
+      return <PageNightPhaseEnd />;
     case GameState.MorningPhaseStart:
-      break; // @todo
+      return <PageMorningPhaseStart />;
     case GameState.NightActionResult:
-      break; // @todo
+      return <PageNightActionResult />;
     case GameState.GameEnd:
-      break; // @todo
+      return <PageGameEnd />;
     case GameState.FinalResult:
-      break; // @todo
+      return <PageFinalResult />;
     case GameState.RoleReveal:
-      break; // @todo
+      return <PageRoleReveal />;
     default:
       break;
   }
