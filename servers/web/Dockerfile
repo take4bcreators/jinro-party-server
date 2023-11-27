@@ -1,16 +1,19 @@
 FROM node:18-alpine AS base
 
-# builder ステージ開始
+# builder ステージ
+# 資材をコンテナ展開してNext.jsの本番用データとしてビルド
 FROM base AS builder
 WORKDIR /app
-ADD ./web/srcfile/build.tar.gz ./
+ADD ./build/build.tar.gz ./
 RUN npm install
 RUN npm run build
 
-# runner ステージ開始
+# runner ステージ
+# ビルドしたデータを builder ステージからコピーして実行
 FROM base AS runner
 WORKDIR /app
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/.next/standalone ./
+EXPOSE 3000
 CMD ["node", "server.js"]

@@ -1,12 +1,11 @@
 # ベースイメージの指定
 FROM openjdk:17
 
-# ワーキングディレクトリの設定
+# コンテナのワーキングディレクトリを設定
 WORKDIR /app
 
 # アプリケーションのJARファイルをコンテナにコピー
-# COPY build/libs/*.jar app.jar
-COPY ./app/build/libs/*.jar app.jar
+COPY ./build/*.jar app.jar
 
 # ポートの公開
 EXPOSE 8080
