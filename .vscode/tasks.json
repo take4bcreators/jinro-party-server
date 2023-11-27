@@ -74,8 +74,44 @@
       "problemMatcher": []
     },
     {
-      "label": "[005] DBのみ起動",
-      "detail": "docker compose up -d でDBのみ起動します",
+      "label": "[101] WEBのみ起動",
+      "detail": "docker compose up -d でフロントエンド（Next.js）のみ起動します",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "database"
+      },
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "up", "-d", "web"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "[102] APPのみ起動",
+      "detail": "docker compose up -d でバックエンド（SprintBoot）のみ起動します",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "database"
+      },
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "up", "-d", "app"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "[103] DBのみ起動",
+      "detail": "docker compose up -d でデータベース（PostgreSQL）のみ起動します",
       "icon": {
         "color": "terminal.ansiGreen",
         "id": "database"
@@ -83,6 +119,24 @@
       "type": "shell",
       "command": "docker",
       "args": ["compose", "up", "-d", "db"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "[104] APP＋DBのみ起動",
+      "detail": "docker compose up -d でバックエンド＋DBのみ起動します",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "database"
+      },
+      "type": "shell",
+      "command": "docker",
+      "args": ["compose", "up", "-d", "app", "db"],
       "group": "none",
       "presentation": {
         "reveal": "always",
