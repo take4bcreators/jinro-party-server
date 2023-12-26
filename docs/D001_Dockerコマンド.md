@@ -1,8 +1,4 @@
 
-
-
-
-
 ```bash
 
 # イメージのビルド
@@ -38,16 +34,4 @@ docker rm --force jinrodbcont
 # ローカルのイメージ削除
 docker rmi jinrodbimg:1.0
 
-
-
-
-
 ```
-
-
-
-
-
-
-
-
