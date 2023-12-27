@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  web:
+    container_name: jinro-frontend
+    build:
+      context: ./servers/web/
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    tty: true
+  app:
+    container_name: jinro-backend
+    build:
+      context: ./servers/app/
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    tty: true
+    depends_on:
+      - db
+    environment:
+      DATASOURCE: jdbc:postgresql://db:5432/jinrodb
+  db:
+    container_name: jinro-database
+    build:
+      context: ./servers/db/
+      dockerfile: Dockerfile
+    ports:
+      - 5432:5432
+    tty: true

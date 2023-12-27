@@ -1,0 +1,6 @@
+game_data_id,device_id,session_id,player_name,player_icon,player_role,player_team,self_role_check,player_state
+gd00001,0001-0001-0001,001,田中,icon01,Citizen,Townsfolk,t,Alive
+gd00001,0001-0001-0002,002,佐藤,icon03,Citizen,Townsfolk,t,Alive
+gd00001,0001-0001-0003,003,鈴木,icon04,Werewolf,WerewolfPack,t,Alive
+gd00001,0001-0001-0004,004,山田,icon02,Seer,Townsfolk,t,Alive
+gd00002,0001-0001-0099,099,ダミー,icon01,Citizen,Townsfolk,t,Alive
